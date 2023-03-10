@@ -13,6 +13,7 @@ class _HomePageState extends State<HomePage> {
   //list of to do task
   List toDoList = [];
   final _textController = TextEditingController();
+  final _desController = TextEditingController();
 
   void handleOnchanged(bool? value, int index) {
     setState(() {
@@ -21,21 +22,21 @@ class _HomePageState extends State<HomePage> {
   }
 
   void createNewTask() {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return DialogBox(
-            textController: _textController,
-            onSave: handleOnSaved,
-            onCancel: () => Navigator.of(context).pop(),
-          );
-        });
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return Note(
+        textController: _textController,
+        desController: _desController,
+        onSave: handleOnSaved,
+        onCancel: () => Navigator.of(context).pop(),
+      );
+    }));
   }
 
   void handleOnSaved() {
     setState(() {
-      toDoList.add([_textController.text, false]);
+      toDoList.add([_textController.text, _desController.text, false]);
       _textController.clear();
+      _desController.clear();
     });
     Navigator.of(context).pop();
   }
@@ -63,7 +64,8 @@ class _HomePageState extends State<HomePage> {
         itemBuilder: (context, index) {
           return ToDoTile(
             taskName: toDoList[index][0],
-            taskComplete: toDoList[index][1],
+            taskDes : toDoList[index][1],
+            taskComplete: toDoList[index][2],
             onChanged: (value) => handleOnchanged(value, index),
             handleDelete: () => handleDelete(index),
           );
