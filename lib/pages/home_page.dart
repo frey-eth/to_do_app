@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
 
   void handleOnchanged(bool? value, int index) {
     setState(() {
-      toDoList[index][1] = !toDoList[index][1];
+      toDoList[index][2] = !toDoList[index][2];
     });
   }
 
