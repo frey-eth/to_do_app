@@ -15,37 +15,61 @@ class Note extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color.fromARGB(255, 246, 246, 247),
-      body: Container(
-        margin: EdgeInsets.only(top: 100, right: 20, left: 20),
-        child: Column(children: [
-          //get user input
-          Text('Title',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
-          TextField(
-            controller: textController,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(), hintText: 'title'),
-          ),
-          Text('Description',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
-          TextField(
-            controller: desController,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(), hintText: 'description'),
-          ),
-          Row(
-            children: [
-              TextButton(
-                onPressed: onSave,
-                child: Text('Save'),
+    return GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Scaffold(
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Title',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20)),
+                          TextField(
+                            controller: textController,
+                            keyboardType: TextInputType.multiline,
+                            maxLines: null,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                hintText: 'title'),
+                          ),
+                          SizedBox(height: 10),
+                          Text('Description',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 25)),
+                          TextField(
+                            controller : desController,
+                            keyboardType: TextInputType.multiline,
+                            maxLines: MediaQuery.of(context).size.height ~/ 40,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                hintText: 'description'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      TextButton(
+                        onPressed: onSave,
+                        child: Text('Save'),
+                      ),
+                      TextButton(onPressed: onCancel, child: Text('Cancel')),
+                    ],
+                  ),
+                ],
               ),
-              TextButton(onPressed: onCancel, child: Text('Cancel')),
-            ],
+            ),
           ),
-        ]),
-      ),
-    );
+        ));
   }
 }

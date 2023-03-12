@@ -6,6 +6,7 @@ class ToDoTile extends StatelessWidget {
   final String taskDes;
   final bool taskComplete;
   Function(bool?)? onChanged;
+  VoidCallback onTap;
   VoidCallback handleDelete;
 
   ToDoTile(
@@ -14,52 +15,63 @@ class ToDoTile extends StatelessWidget {
       required this.taskDes,
       required this.taskComplete,
       required this.onChanged,
-      required this.handleDelete});
+      required this.handleDelete,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Slidable(
       child: Padding(
-        padding: const EdgeInsets.only(left: 12.0, right: 12, top: 12),
-        child: Container(
-          padding: EdgeInsets.all(24),
-          child: Row(
-            children: [
-              //checkbox
-              Checkbox(
-                value: taskComplete,
-                onChanged: onChanged,
-                activeColor: Colors.black,
-              ),
-              //task name
-              Column(
+          padding: const EdgeInsets.only(left: 12.0, right: 12, top: 12),
+          child: GestureDetector(
+            onTap: onTap,
+            child: Container(
+              padding: EdgeInsets.all(24),
+              child: Row(
                 children: [
-                  Text(
-                taskName,
-                style: TextStyle(
-                    decoration: taskComplete
-                        ? TextDecoration.lineThrough
-                        : TextDecoration.none),
-              ),
-              //task description
-              Text(
-                taskDes,
-                style: TextStyle(
-                    decoration: taskComplete
-                        ? TextDecoration.lineThrough
-                        : TextDecoration.none),
-              ),
+                  Checkbox(
+                    value: taskComplete,
+                    onChanged: onChanged,
+                    activeColor: Colors.black,
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          taskName,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            decoration: taskComplete
+                                ? TextDecoration.lineThrough
+                                : TextDecoration.none,
+                          ),
+                          textAlign: TextAlign.left,
+                          softWrap: true,
+                          maxLines: 1,
+                        ),
+                        Text(
+                          taskDes,
+                          style: TextStyle(
+                            decoration: taskComplete
+                                ? TextDecoration.lineThrough
+                                : TextDecoration.none,
+                          ),
+                          maxLines: 2,
+                          textAlign: TextAlign.left,
+                          softWrap: true,
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
-              )
-              
-              //delete task
-            ],
-          ),
-          decoration: BoxDecoration(
-              color: Color.fromARGB(255, 193, 233, 191),
-              borderRadius: BorderRadius.circular(12)),
-        ),
-      ),
+              ),n 
+              decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 193, 233, 191),
+                  borderRadius: BorderRadius.circular(12)),
+            ),
+          )),
       endActionPane: ActionPane(
         motion: ScrollMotion(),
         children: [

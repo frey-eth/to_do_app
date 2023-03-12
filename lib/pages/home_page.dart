@@ -47,6 +47,10 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void handleOnTap() {
+    print('taped');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,8 +67,9 @@ class _HomePageState extends State<HomePage> {
         itemCount: toDoList.length,
         itemBuilder: (context, index) {
           return ToDoTile(
+            onTap: handleOnTap,
             taskName: toDoList[index][0],
-            taskDes : toDoList[index][1],
+            taskDes: toDoList[index][1],
             taskComplete: toDoList[index][2],
             onChanged: (value) => handleOnchanged(value, index),
             handleDelete: () => handleDelete(index),
