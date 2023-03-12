@@ -66,7 +66,7 @@ class ToDoTile extends StatelessWidget {
                     ),
                   ),
                 ],
-              ),n 
+              ),
               decoration: BoxDecoration(
                   color: Color.fromARGB(255, 193, 233, 191),
                   borderRadius: BorderRadius.circular(12)),

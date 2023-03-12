@@ -33,7 +33,7 @@ class Note extends StatelessWidget {
                           Text('Title',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20)),
-                          TextField(
+                          TextField(                      
                             controller: textController,
                             keyboardType: TextInputType.multiline,
                             maxLines: null,

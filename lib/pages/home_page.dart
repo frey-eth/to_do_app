@@ -11,9 +11,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //list of to do task
-  List toDoList = [];
   final _textController = TextEditingController();
   final _desController = TextEditingController();
+  List toDoList = [];
+
 
   void handleOnchanged(bool? value, int index) {
     setState(() {
@@ -32,12 +33,22 @@ class _HomePageState extends State<HomePage> {
     }));
   }
 
-  void handleOnSaved() {
-    setState(() {
-      toDoList.add([_textController.text, _desController.text, false]);
-      _textController.clear();
-      _desController.clear();
-    });
+  void handleOnSaved({int? index}) {
+    if (index == null) {
+      setState(() {
+        toDoList.add([_textController.text, _desController.text, false]);
+        _textController.clear();
+        _desController.clear();
+      });
+    } else {
+      setState(() {
+        toDoList[index][0] = _textController.text;
+        toDoList[index][1] = _desController.text;
+        _textController.clear();
+        _desController.clear();
+      });
+    }
+    print(toDoList);
     Navigator.of(context).pop();
   }
 
@@ -47,9 +58,19 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void handleOnTap() {
-    print('taped');
-  }
+  void handleOnTap(int index) {
+  _textController.text = toDoList[index][0];
+  _desController.text = toDoList[index][1];
+  Navigator.push(context, MaterialPageRoute(builder: (context) {
+    return Note(
+      textController: _textController,
+      desController: _desController,
+      onSave: () => handleOnSaved(index: index),
+      onCancel: () => Navigator.of(context).pop(),
+    );
+  }));
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +88,7 @@ class _HomePageState extends State<HomePage> {
         itemCount: toDoList.length,
         itemBuilder: (context, index) {
           return ToDoTile(
-            onTap: handleOnTap,
+            onTap: () => handleOnTap(index),
             taskName: toDoList[index][0],
             taskDes: toDoList[index][1],
             taskComplete: toDoList[index][2],
