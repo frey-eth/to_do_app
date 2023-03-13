@@ -30,10 +30,7 @@ class Note extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Title',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20)),
-                          TextField(                      
+                          TextField(
                             controller: textController,
                             keyboardType: TextInputType.multiline,
                             maxLines: null,
@@ -42,11 +39,8 @@ class Note extends StatelessWidget {
                                 hintText: 'title'),
                           ),
                           SizedBox(height: 10),
-                          Text('Description',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 25)),
                           TextField(
-                            controller : desController,
+                            controller: desController,
                             keyboardType: TextInputType.multiline,
                             maxLines: MediaQuery.of(context).size.height ~/ 40,
                             decoration: InputDecoration(

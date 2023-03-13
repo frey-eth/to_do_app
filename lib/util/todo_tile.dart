@@ -43,9 +43,7 @@ class ToDoTile extends StatelessWidget {
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18,
-                            decoration: taskComplete
-                                ? TextDecoration.lineThrough
-                                : TextDecoration.none,
+                      
                           ),
                           textAlign: TextAlign.left,
                           softWrap: true,
@@ -54,9 +52,7 @@ class ToDoTile extends StatelessWidget {
                         Text(
                           taskDes,
                           style: TextStyle(
-                            decoration: taskComplete
-                                ? TextDecoration.lineThrough
-                                : TextDecoration.none,
+
                           ),
                           maxLines: 2,
                           textAlign: TextAlign.left,
